@@ -1,0 +1,1 @@
+create database nawannaxue_operation;

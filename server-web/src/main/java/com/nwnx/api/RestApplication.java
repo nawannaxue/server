@@ -12,5 +12,6 @@ public class RestApplication extends ResourceConfig {
     public RestApplication() {
         logger.info("Starting registering REST api resources");
         packages(true, "com.nwnx.api");
+        packages(true, "org.nn");
     }
 }
