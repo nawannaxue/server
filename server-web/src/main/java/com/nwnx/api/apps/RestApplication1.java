@@ -1,4 +1,4 @@
-package com.nwnx.api;
+package com.nwnx.api.apps;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.slf4j.Logger;

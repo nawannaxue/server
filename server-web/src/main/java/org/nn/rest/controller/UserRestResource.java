@@ -20,7 +20,6 @@ import org.springframework.stereotype.Component;
 @Path("/user")
 public class UserRestResource {
 
-
     @Autowired(required = true)
     @Qualifier("userService")
     private UserService userService;
@@ -30,7 +29,6 @@ public class UserRestResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/user-json-meta")
     public UserModal getUser() {
-
         UserModal userModal = new UserModal();
         userModal.setEmail("jajfaddf");
         userModal.setFirstName("jayaram");
