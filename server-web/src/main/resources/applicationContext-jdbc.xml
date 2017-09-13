@@ -10,9 +10,9 @@
            http://www.springframework.org/schema/tx
            http://www.springframework.org/schema/tx/spring-tx.xsd">
     <context:annotation-config/>
-    <context:component-scan base-package="org.javasavvy.rest.controller"/>
-    <context:component-scan base-package="org.javasavvy.tutorial.services"/>
-    <context:component-scan base-package="org.javasavvy.tutorial.dao"/>
+    <context:component-scan base-package="org.nn.rest.controller"/>
+    <context:component-scan base-package="org.nn.tutorial.services"/>
+    <context:component-scan base-package="org.nn.tutorial.dao"/>
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
