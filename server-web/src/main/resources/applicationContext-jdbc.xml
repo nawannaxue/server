@@ -3,15 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans.xsd
-           http://www.springframework.org/schema/tx
-           http://www.springframework.org/schema/tx/spring-tx.xsd">
+                           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
-
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations" value="classpath:jdbc.properties"/>
-    </bean>
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="${jdbc.driverClassName}"/>
@@ -34,22 +30,48 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-    <bean id="entityManagerFactory"
-          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="persistenceUnitName" value="nawannaxue_operation"/>
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
-        </property>
-        <property name="jpaProperties">
-            <props>
-                <prop key="hibernate.dialect">com.nwnx.hibernate.MyMySQL57Dialect</prop>
-                <prop key="hibernate.dialect.storage_engine">innodb</prop>
-                <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.format_sql">true</prop>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
-            </props>
-        </property>
-    </bean>
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+    <beans profile="production">
+        <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+            <property name="locations" value="classpath:/etc/nwnx/jdbc.properties"/>
+        </bean>
+        <bean id="entityManagerFactory"
+              class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+            <property name="dataSource" ref="dataSource"/>
+            <property name="persistenceUnitName" value="${jpa.persistenceUnitName}"/>
+            <property name="jpaVendorAdapter">
+                <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+            </property>
+            <property name="jpaProperties">
+                <props>
+                    <prop key="hibernate.dialect">com.nwnx.hibernate.MyMySQL57Dialect</prop>
+                    <prop key="hibernate.dialect.storage_engine">innodb</prop>
+                </props>
+            </property>
+        </bean>
+    </beans>
+
+    <beans profile="development">
+        <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+            <property name="locations" value="classpath:jdbc.properties"/>
+        </bean>
+        <bean id="entityManagerFactory"
+              class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+            <property name="dataSource" ref="dataSource"/>
+            <property name="persistenceUnitName" value="${jpa.persistenceUnitName}"/>
+            <property name="jpaVendorAdapter">
+                <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+            </property>
+            <property name="jpaProperties">
+                <props>
+                    <prop key="hibernate.dialect">com.nwnx.hibernate.MyMySQL57Dialect</prop>
+                    <prop key="hibernate.dialect.storage_engine">innodb</prop>
+                    <prop key="hibernate.show_sql">true</prop>
+                    <prop key="hibernate.format_sql">true</prop>
+                    <prop key="hibernate.hbm2ddl.auto">create</prop>
+                </props>
+            </property>
+        </bean>
+    </beans>
 </beans>
