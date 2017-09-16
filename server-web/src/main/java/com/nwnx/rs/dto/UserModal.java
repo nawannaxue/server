@@ -1,9 +1,17 @@
 package com.nwnx.rs.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+
 public class UserModal {
-	
+
+	@NotNull
 	private String firstName;
+
+	@NotNull
 	private String lastName;
+
+	@Email
 	private String email;
 	private String sex;
 	private String password;

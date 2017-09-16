@@ -1,11 +1,9 @@
 package com.nwnx.rs.dto.responses;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.base.Throwables;
 
 import java.util.Objects;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorResponse {
     private final int code;
     private final String message;

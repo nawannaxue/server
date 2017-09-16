@@ -1,5 +1,6 @@
 package com.nwnx.rs.resources;
 
+import com.nwnx.components.validation.BeanValidator;
 import com.nwnx.persistence.entities.User;
 import com.nwnx.rs.dto.UserModal;
 import com.nwnx.rs.dto.UserStatusModal;
@@ -14,6 +15,9 @@ import javax.ws.rs.core.MediaType;
 @Component
 @Path("/user")
 public class UserRestResource {
+
+    @Autowired
+    private BeanValidator validator;
 
     @Autowired(required = true)
     @Qualifier("userService")
@@ -66,6 +70,9 @@ public class UserRestResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/create-user")
     public UserStatusModal createUser(UserModal userModal) {
+        validator.validate(userModal);
+
+
         System.out.println("create User:" + userModal.getEmail());
         User user = null;
         UserStatusModal status = new UserStatusModal();
