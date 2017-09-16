@@ -56,9 +56,23 @@
         <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
             <property name="locations" value="classpath:jdbc.properties"/>
         </bean>
+        <bean id="proxyDataSource" class="net.ttddyy.dsproxy.support.BeanNameProxyDataSource">
+            <property name="dataSource" ref="dataSource"/>
+            <property name="listener" ref="listeners"/>
+        </bean>
+        <bean id="listeners" class="net.ttddyy.dsproxy.listener.ChainListener">
+            <property name="listeners">
+                <list>
+                    <bean class="net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener">
+                        <property name="logLevel" value="INFO"/>
+                    </bean>
+                    <bean class="net.ttddyy.dsproxy.listener.DataSourceQueryCountListener"/>
+                </list>
+            </property>
+        </bean>
         <bean id="entityManagerFactory"
               class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-            <property name="dataSource" ref="dataSource"/>
+            <property name="dataSource" ref="proxyDataSource"/>
             <property name="persistenceUnitName" value="${jpa.persistenceUnitName}"/>
             <property name="jpaVendorAdapter">
                 <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>

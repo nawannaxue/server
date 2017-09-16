@@ -8,8 +8,9 @@
         </encoder>
     </appender>
 
-    <!-- Output SQL statement binding parameters and should be in DEV mode only -->
+    <!-- Output SQL statement binding parameters and should be in DEV mode only
     <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+    -->
 
     <root level="info">
         <appender-ref ref="STDOUT"/>

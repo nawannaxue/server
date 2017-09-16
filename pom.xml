@@ -27,6 +27,7 @@
         <amazon.awssdk.version>2.0.0-preview-2</amazon.awssdk.version>
         <slf4j.version>1.7.25</slf4j.version>
         <logback.version>1.2.3</logback.version>
+        <datasource.proxy.version>1.4.2</datasource.proxy.version>
         <junit.jupiter.version>5.0.0-RC3</junit.jupiter.version>
         <junit.platform.version>1.0.0-RC3</junit.platform.version>
     </properties>
@@ -289,6 +290,11 @@
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-access</artifactId>
                 <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.ttddyy</groupId>
+                <artifactId>datasource-proxy</artifactId>
+                <version>${datasource.proxy.version}</version>
             </dependency>
 
             <!-- Test libraries -->
