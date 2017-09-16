@@ -1,20 +1,15 @@
-package org.nn.rest.controller;
+package com.nwnx.rs.resources;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
-import org.nn.rest.modal.UserModal;
-import org.nn.rest.modal.UserStatusModal;
-import org.nn.tutorial.entity.User;
-import org.nn.tutorial.services.UserService;
+import com.nwnx.persistence.entities.User;
+import com.nwnx.rs.dto.UserModal;
+import com.nwnx.rs.dto.UserStatusModal;
+import com.nwnx.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 @Component
 @Path("/user")
@@ -88,10 +83,6 @@ public class UserRestResource {
             status.setStatus(205);
             status.setMessage("Error in Creating users:" + e.getMessage());
         }
-
-
         return status;
-
     }
-
 }

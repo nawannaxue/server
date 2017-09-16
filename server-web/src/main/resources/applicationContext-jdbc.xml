@@ -45,7 +45,7 @@
             </property>
             <property name="jpaProperties">
                 <props>
-                    <prop key="hibernate.dialect">com.nwnx.hibernate.MyMySQL57Dialect</prop>
+                    <prop key="hibernate.dialect">com.nwnx.persistence.hibernate.MyMySQL57Dialect</prop>
                     <prop key="hibernate.dialect.storage_engine">innodb</prop>
                 </props>
             </property>
@@ -79,7 +79,7 @@
             </property>
             <property name="jpaProperties">
                 <props>
-                    <prop key="hibernate.dialect">com.nwnx.hibernate.MyMySQL57Dialect</prop>
+                    <prop key="hibernate.dialect">com.nwnx.persistence.hibernate.MyMySQL57Dialect</prop>
                     <prop key="hibernate.dialect.storage_engine">innodb</prop>
                     <prop key="hibernate.show_sql">true</prop>
                     <prop key="hibernate.format_sql">true</prop>

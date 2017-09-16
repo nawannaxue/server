@@ -1,4 +1,4 @@
-package org.nn.rest.modal;
+package com.nwnx.rs.dto;
 
 public class UserModal {
 	

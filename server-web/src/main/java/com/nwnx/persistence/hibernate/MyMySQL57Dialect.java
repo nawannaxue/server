@@ -1,4 +1,4 @@
-package com.nwnx.hibernate;
+package com.nwnx.persistence.hibernate;
 
 import org.hibernate.dialect.MySQL57Dialect;
 import org.hibernate.type.StandardBasicTypes;

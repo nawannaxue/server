@@ -1,4 +1,4 @@
-package com.nwnx.api.resources;
+package com.nwnx.rs.resources;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

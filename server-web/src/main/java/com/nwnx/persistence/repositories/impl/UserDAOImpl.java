@@ -1,13 +1,14 @@
-package org.nn.tutorial.dao;
+package com.nwnx.persistence.repositories.impl;
+
+import com.nwnx.persistence.entities.User;
+import com.nwnx.persistence.repositories.UserDAO;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-import org.nn.tutorial.entity.User;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service("userDAO")
 @Transactional(propagation=Propagation.REQUIRED)
@@ -39,7 +40,6 @@ public class UserDAOImpl implements UserDAO {
 
 	@Transactional(readOnly=true)
 	public User getUserById(long userId) {
-		
 		 Query query  = entityManager.createQuery("select user from User user where user.userId=:userId");
 		 query.setParameter("userId", userId);
 		 return (User)query.getSingleResult();

@@ -1,4 +1,4 @@
-package com.nwnx.api.dto.responses;
+package com.nwnx.rs.dto.responses;
 
 public class ErrorResponse {
 

@@ -1,4 +1,4 @@
-package com.nwnx.api.apps;
+package com.nwnx.rs.applications;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
@@ -11,19 +11,23 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.ApplicationPath;
 
-@ApplicationPath("/api/admin")
-public class RestApplication1 extends ResourceConfig {
-    private static final Logger logger = LoggerFactory.getLogger(RestApplication1.class);
+@ApplicationPath("/api/users")
+public class NwnxApplication extends ResourceConfig {
+    private static final Logger logger = LoggerFactory.getLogger(NwnxApplication.class);
 
-    public RestApplication1() {
-        logger.info("Starting registering REST api resources");
-        packages(true, "com.nwnx.api");
+    public NwnxApplication() {
+        logger.info("Registering JAX-RS resources");
 
+        packages(true, "com.nwnx.rs.resources");
+
+        registerInstances(getJacksonJsonProvider());
+    }
+
+    private JacksonJsonProvider getJacksonJsonProvider() {
         ObjectMapper mapper = new ObjectMapper()
                 .registerModule(new ParameterNamesModule())
                 .registerModule(new Jdk8Module())
                 .registerModule(new JavaTimeModule());
-        JacksonJsonProvider jacksonJsonProvider = new JacksonJsonProvider(mapper);
-        registerInstances(jacksonJsonProvider);
+        return new JacksonJsonProvider(mapper);
     }
 }

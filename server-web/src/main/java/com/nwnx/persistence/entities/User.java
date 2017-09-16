@@ -1,9 +1,8 @@
-package org.nn.tutorial.entity;
-
-import java.io.Serializable;
-import java.util.Date;
+package com.nwnx.persistence.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 
 @Table(name = "user")
