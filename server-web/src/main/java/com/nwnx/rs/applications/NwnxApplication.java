@@ -7,6 +7,7 @@ import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import com.nwnx.rs.providers.exception.BadRequestExceptionMapper;
 import com.nwnx.rs.providers.exception.CatchAllExceptionMapper;
+import com.nwnx.rs.providers.filters.CharsetResponseFilter;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.filter.CsrfProtectionFilter;
 import org.slf4j.Logger;
@@ -25,9 +26,11 @@ public class NwnxApplication extends ResourceConfig {
 
         registerClasses(BadRequestExceptionMapper.class, CatchAllExceptionMapper.class);
 
-        registerClasses(CsrfProtectionFilter.class);
+        registerClasses(CsrfProtectionFilter.class, CharsetResponseFilter.class);
 
         registerInstances(getJacksonJsonProvider());
+
+        logger.info("Registered all JAX-RS resources");
     }
 
     private JacksonJsonProvider getJacksonJsonProvider() {
