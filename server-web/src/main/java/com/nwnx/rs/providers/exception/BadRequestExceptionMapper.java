@@ -12,7 +12,8 @@ public class BadRequestExceptionMapper implements ExceptionMapper<BadRequestExce
 
     @Override
     public Response toResponse(BadRequestException exception) {
-        ErrorResponse error = new ErrorResponse(4000, "Bad Request - please check and resubmit your request", exception.toString());
-        return Response.status(Response.Status.BAD_REQUEST).entity(error).build();
+        return Response.status(Response.Status.BAD_REQUEST)
+                .entity(ErrorResponse.of(4000, "Bad Request - please check and resubmit your request", exception))
+                .build();
     }
 }

@@ -14,11 +14,9 @@ import javax.persistence.Query;
 @Transactional(propagation=Propagation.REQUIRED)
 public class UserDAOImpl implements UserDAO {
 	
-	
 	@PersistenceContext
 	public EntityManager entityManager;
 
-	
 	@Transactional(readOnly=false)
 	public User addUser(User user) {
 		entityManager.persist(user);

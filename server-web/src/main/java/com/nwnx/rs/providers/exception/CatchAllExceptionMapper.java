@@ -11,7 +11,8 @@ public class CatchAllExceptionMapper implements ExceptionMapper<Throwable> {
 
     @Override
     public Response toResponse(Throwable exception) {
-        ErrorResponse error = new ErrorResponse(5000, "Internal server error and please contact your administrator", exception.toString());
-        return Response.serverError().entity(error).build();
+        return Response.serverError()
+                .entity(ErrorResponse.of(5000, "Internal server error and please contact your administrator", exception))
+                .build();
     }
 }
