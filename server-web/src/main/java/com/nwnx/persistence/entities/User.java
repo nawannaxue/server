@@ -1,18 +1,14 @@
 package com.nwnx.persistence.entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
-
 
 @Table(name = "user")
 @Entity
-public class User implements Serializable {
-
-    private static final long serialVersionUID = 1020230L;
+public class User {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
 
     private String firstName;
@@ -90,6 +86,4 @@ public class User implements Serializable {
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
     }
-
-
 }

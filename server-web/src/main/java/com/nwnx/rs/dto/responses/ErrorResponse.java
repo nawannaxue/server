@@ -1,9 +1,12 @@
 package com.nwnx.rs.dto.responses;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.base.Throwables;
+import com.nwnx.components.SystemProperties;
 
 import java.util.Objects;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorResponse {
     private final int code;
     private final String message;
@@ -17,7 +20,7 @@ public class ErrorResponse {
 
     public static ErrorResponse of(int code, String message, Throwable throwable) {
         Objects.requireNonNull(message);
-        return new ErrorResponse(code, message, Throwables.getStackTraceAsString(throwable));
+        return new ErrorResponse(code, message, SystemProperties.isDevMode() ? Throwables.getStackTraceAsString(throwable) : null);
     }
 
     public int getCode() {

@@ -4,6 +4,7 @@ import com.nwnx.rs.dto.responses.ErrorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
@@ -16,7 +17,10 @@ public class CatchAllExceptionMapper implements ExceptionMapper<Throwable> {
     public Response toResponse(Throwable exception) {
         logger.info("Internal server error", exception);
         return Response.serverError()
-                .entity(ErrorResponse.of(5000, "Internal server error and please contact your administrator", exception))
+                .entity(ErrorResponse.of(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(),
+                        "Internal server error and please contact your administrator",
+                        exception))
+                .type(MediaType.APPLICATION_JSON)
                 .build();
     }
 }

@@ -1,1 +1,1 @@
-create database nawannaxue_operation;
+create database nwnx_operational;

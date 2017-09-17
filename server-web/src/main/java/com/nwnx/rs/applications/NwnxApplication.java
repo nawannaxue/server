@@ -1,12 +1,15 @@
 package com.nwnx.rs.applications;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import com.nwnx.rs.providers.exception.*;
 import com.nwnx.rs.providers.filters.CharsetResponseFilter;
+import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.filter.CsrfProtectionFilter;
 import org.slf4j.Logger;
@@ -14,7 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.ApplicationPath;
 
-@ApplicationPath("/api/users")
+@ApplicationPath("/api")
 public class NwnxApplication extends ResourceConfig {
     private static final Logger logger = LoggerFactory.getLogger(NwnxApplication.class);
 
@@ -28,7 +31,7 @@ public class NwnxApplication extends ResourceConfig {
         registerClasses(JsonGenerationExceptionMapper.class,
                 JsonMappingExceptionMapper.class,
                 JsonParseExceptionMapper.class,
-                BadRequestExceptionMapper.class,
+                WebApplicationExceptionMapper.class,
                 CatchAllExceptionMapper.class);
 
         // register filters
@@ -38,6 +41,10 @@ public class NwnxApplication extends ResourceConfig {
         // register entity providers
         registerInstances(getJacksonJsonProvider());
 
+        // register logging feature
+        // TODO: make it work with slf4j
+//        registerClasses(LoggingFeature.class);
+
         logger.info("Registered all JAX-RS resources");
     }
 
@@ -45,7 +52,9 @@ public class NwnxApplication extends ResourceConfig {
         ObjectMapper mapper = new ObjectMapper()
                 .registerModule(new ParameterNamesModule())
                 .registerModule(new Jdk8Module())
-                .registerModule(new JavaTimeModule());
+                .registerModule(new JavaTimeModule())
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true)
+                .configure(SerializationFeature.INDENT_OUTPUT, true);
         return new JacksonJsonProvider(mapper);
     }
 }
