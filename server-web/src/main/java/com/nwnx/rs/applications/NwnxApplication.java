@@ -14,8 +14,10 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.filter.CsrfProtectionFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import javax.ws.rs.ApplicationPath;
+import java.util.logging.Level;
 
 @ApplicationPath("/api")
 public class NwnxApplication extends ResourceConfig {
@@ -42,10 +44,19 @@ public class NwnxApplication extends ResourceConfig {
         registerInstances(getJacksonJsonProvider());
 
         // register logging feature
-        // TODO: make it work with slf4j
-//        registerClasses(LoggingFeature.class);
+        setupJulToSlf4j();
+        property(LoggingFeature.LOGGING_FEATURE_LOGGER_LEVEL_SERVER, Level.INFO.getName());
 
         logger.info("Registered all JAX-RS resources");
+    }
+
+    private void setupJulToSlf4j() {
+        // Optionally remove existing handlers attached to j.u.l root logger
+        SLF4JBridgeHandler.removeHandlersForRootLogger();  // (since SLF4J 1.6.5)
+
+        // add SLF4JBridgeHandler to j.u.l's root logger, should be done once during
+        // the initialization phase of your application
+        SLF4JBridgeHandler.install();
     }
 
     private JacksonJsonProvider getJacksonJsonProvider() {
