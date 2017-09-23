@@ -4,6 +4,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 @Table(name = "user")
@@ -19,11 +20,11 @@ public class User {
 
     @CreationTimestamp
     @Column(name = "created_on", nullable = false, updatable = false)
-    private Date createdOn;
+    private ZonedDateTime createdOn;
 
     @UpdateTimestamp
     @Column(name = "modified_on", nullable = false)
-    private Date modifiedOn;
+    private ZonedDateTime modifiedOn;
 
     @Column(name = "deleted", nullable = false)
     private boolean deleted = false;
@@ -56,11 +57,11 @@ public class User {
         return id;
     }
 
-    public Date getCreatedOn() {
+    public ZonedDateTime getCreatedOn() {
         return createdOn;
     }
 
-    public Date getModifiedOn() {
+    public ZonedDateTime getModifiedOn() {
         return modifiedOn;
     }
 

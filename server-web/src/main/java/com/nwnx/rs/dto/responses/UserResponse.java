@@ -1,13 +1,13 @@
 package com.nwnx.rs.dto.responses;
 
-import java.util.Date;
+import java.time.ZonedDateTime;
 
 public class UserResponse {
     private long id;
 
-    private Date createdOn;
+    private ZonedDateTime createdOn;
 
-    private Date modifiedOn;
+    private ZonedDateTime modifiedOn;
 
     private String fullName;
 
@@ -17,7 +17,7 @@ public class UserResponse {
 
     private String password;
 
-    public UserResponse(long id, Date createdOn, Date modifiedOn, String fullName, String name, String email, String password) {
+    public UserResponse(long id, ZonedDateTime createdOn, ZonedDateTime modifiedOn, String fullName, String name, String email, String password) {
         this.id = id;
         this.createdOn = createdOn;
         this.modifiedOn = modifiedOn;
@@ -31,11 +31,11 @@ public class UserResponse {
         return id;
     }
 
-    public Date getCreatedOn() {
+    public ZonedDateTime getCreatedOn() {
         return createdOn;
     }
 
-    public Date getModifiedOn() {
+    public ZonedDateTime getModifiedOn() {
         return modifiedOn;
     }
 

@@ -1,8 +1,5 @@
 package com.nwnx.components;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.Optional;
 
 public final class SystemProperties {

@@ -49,6 +49,7 @@
                         <source>${java.version}</source>
                         <target>${java.version}</target>
                         <compilerArgument>-g:vars</compilerArgument>
+                        <compilerArgument>-parameters</compilerArgument>
                         <testCompilerArgument>-g:vars</testCompilerArgument>
                     </configuration>
                 </plugin>
