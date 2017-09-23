@@ -1,5 +1,8 @@
 package com.nwnx.persistence.entities;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,81 +12,91 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userId;
+    private long id;
 
-    private String firstName;
-    private String lastName;
-    private String sex;
+    @Version
+    private int version;
+
+    @CreationTimestamp
+    @Column(name = "created_on", nullable = false, updatable = false)
+    private Date createdOn;
+
+    @UpdateTimestamp
+    @Column(name = "modified_on", nullable = false)
+    private Date modifiedOn;
+
+    @Column(name = "deleted", nullable = false)
+    private boolean deleted = false;
+
+    @Column(name = "suspended", nullable = false)
+    private boolean suspended = false;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "full_name")
+    private String fullName;
+
+    @Column(name = "email", nullable = false)
     private String email;
+
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedDate;
-
-    public long getUserId() {
-        return userId;
+    protected User() {
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public long getId() {
+        return id;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public Date getCreatedOn() {
+        return createdOn;
     }
 
-    public String getLastName() {
-        return lastName;
+    public Date getModifiedOn() {
+        return modifiedOn;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public boolean isDeleted() {
+        return deleted;
     }
 
-    public String getSex() {
-        return sex;
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public boolean isSuspended() {
+        return suspended;
+    }
+
+    public void setSuspended(boolean suspended) {
+        this.suspended = suspended;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
     }
 }

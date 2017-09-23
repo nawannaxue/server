@@ -33,6 +33,7 @@
     </properties>
 
     <modules>
+        <module>server-database</module>
         <module>server-web</module>
     </modules>
 

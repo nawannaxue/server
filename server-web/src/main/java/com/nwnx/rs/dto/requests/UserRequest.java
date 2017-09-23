@@ -1,58 +1,44 @@
 package com.nwnx.rs.dto.requests;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 
 public class UserRequest {
 
-    @NotNull
-    private String firstName;
+    private String fullName;
 
     @NotNull
-    private String lastName;
+    private String name;
 
     @Email
     private String email;
-    private String sex;
+
+    @NotNull
     private String password;
 
-    public String getFirstName() {
-        return firstName;
+    @JsonCreator
+    public UserRequest(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getName() {
+        return name;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public Optional<String> getFullName() {
+        return Optional.ofNullable(fullName);
     }
 }

@@ -17,16 +17,16 @@ public class UserDAOImpl implements UserDAO {
 	@PersistenceContext
 	public EntityManager entityManager;
 
-	@Transactional(readOnly=false)
+	@Transactional
 	public User addUser(User user) {
 		entityManager.persist(user);
 		return user;
 	}
 
 	@Transactional(readOnly=true)
-	public User getUser(long userId) {
-		 Query query  = entityManager.createQuery("select user from User user where user.userId=:userId");
-		 query.setParameter("userId", userId);
+	public User getUser(long id) {
+		 Query query  = entityManager.createQuery("select user from User user where user.id=:id");
+		 query.setParameter("id", id);
 		 return (User)query.getSingleResult();
 	}
 
@@ -34,12 +34,5 @@ public class UserDAOImpl implements UserDAO {
 	public User getUser(String email) {
 		return (User) entityManager.createQuery("select user from User user where"
 				+ " user.email=:email").setParameter("email", email).getSingleResult();
-	}
-
-	@Transactional(readOnly=true)
-	public User getUserById(long userId) {
-		 Query query  = entityManager.createQuery("select user from User user where user.userId=:userId");
-		 query.setParameter("userId", userId);
-		 return (User)query.getSingleResult();
 	}
 }

@@ -8,7 +8,12 @@ import com.nwnx.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -28,19 +33,10 @@ public class UserResource {
     public Response createUser(UserRequest userRequest) {
         validator.validate(userRequest);
 
-        User user = userService.addUser(userRequest.getFirstName(),
-                userRequest.getLastName(),
-                userRequest.getEmail(),
-                userRequest.getSex(),
-                userRequest.getPassword());
-
-        UserResponse response = new UserResponse();
-        response.setEmail(user.getEmail());
-        response.setFirstName(user.getFirstName());
-        response.setLastName(user.getLastName());
-        response.setSex(user.getSex());
-        response.setUserId(user.getUserId());
-
+        User user = userService.addUser(userRequest);
+        UserResponse response = new UserResponse(user.getId(), user.getCreatedOn(),
+                user.getModifiedOn(), user.getFullName(), user.getName(),
+                user.getEmail(), user.getPassword());
         return Response.ok(response).build();
     }
 
@@ -51,13 +47,9 @@ public class UserResource {
     public Response getUser(@PathParam("id") long userId) {
         User user = userService.getUser(userId);
 
-        UserResponse response = new UserResponse();
-        response.setEmail(user.getEmail());
-        response.setFirstName(user.getFirstName());
-        response.setLastName(user.getLastName());
-        response.setSex(user.getSex());
-        response.setUserId(user.getUserId());
-
+        UserResponse response = new UserResponse(user.getId(), user.getCreatedOn(),
+                user.getModifiedOn(), user.getFullName(), user.getName(),
+                user.getEmail(), user.getPassword());
         return Response.ok(response).build();
     }
 }

@@ -1,47 +1,57 @@
 package com.nwnx.rs.dto.responses;
 
-public class UserResponse {
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String sex;
-    private String password;
-    private long userId;
+import java.util.Date;
 
-    public String getFirstName() {
-        return firstName;
+public class UserResponse {
+    private long id;
+
+    private Date createdOn;
+
+    private Date modifiedOn;
+
+    private String fullName;
+
+    private String name;
+
+    private String email;
+
+    private String password;
+
+    public UserResponse(long id, Date createdOn, Date modifiedOn, String fullName, String name, String email, String password) {
+        this.id = id;
+        this.createdOn = createdOn;
+        this.modifiedOn = modifiedOn;
+        this.fullName = fullName;
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+
+    public long getId() {
+        return id;
     }
-    public String getLastName() {
-        return lastName;
+
+    public Date getCreatedOn() {
+        return createdOn;
     }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+
+    public Date getModifiedOn() {
+        return modifiedOn;
     }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public String getEmail() {
         return email;
     }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getSex() {
-        return sex;
-    }
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-    public long getUserId() {
-        return userId;
-    }
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
+
     public String getPassword() {
         return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
