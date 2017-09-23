@@ -23,9 +23,6 @@ import org.slf4j.bridge.SLF4JBridgeHandler;
 import javax.ws.rs.ApplicationPath;
 import java.util.logging.Level;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-import static com.fasterxml.jackson.annotation.PropertyAccessor.FIELD;
-
 @ApplicationPath("/api")
 public class NwnxApplication extends ResourceConfig {
     private static final Logger logger = LoggerFactory.getLogger(NwnxApplication.class);
@@ -71,9 +68,10 @@ public class NwnxApplication extends ResourceConfig {
                 .registerModule(new ParameterNamesModule())
                 .registerModule(new Jdk8Module())
                 .registerModule(new JavaTimeModule())
-//                .setVisibility(FIELD, ANY)
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true)
-                .configure(SerializationFeature.INDENT_OUTPUT, true);
+                .configure(SerializationFeature.INDENT_OUTPUT, true)
+                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+                .configure(SerializationFeature.WRITE_DATES_WITH_ZONE_ID, true);
         return new JacksonJsonProvider(mapper);
     }
 }
