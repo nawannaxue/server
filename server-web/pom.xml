@@ -151,5 +151,25 @@
             <groupId>net.ttddyy</groupId>
             <artifactId>datasource-proxy</artifactId>
         </dependency>
+
+        <!-- Test libraries -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Remove it if Intellij has fully support for Junit5
+        Only required to run tests in an IntelliJ IDEA that bundles an older version -->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

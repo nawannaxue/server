@@ -21,7 +21,7 @@
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>3.5.3</version>
                 <configuration>
-                    <verbos>true</verbos>
+                    <verbose>false</verbose>
                     <driver>com.mysql.jdbc.Driver</driver>
                     <username>root</username>
                     <password>password</password>
@@ -29,7 +29,18 @@
                 <executions>
                     <execution>
                         <phase>process-resources</phase>
-                        <id>operational</id>
+                        <id>operational_dropAll</id>
+                        <goals>
+                            <goal>dropAll</goal>
+                        </goals>
+                        <configuration>
+                            <clearCheckSums>true</clearCheckSums>
+                            <url>jdbc:mysql://localhost:3306/nwnx_operational</url>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <id>operational_update</id>
                         <goals>
                             <goal>update</goal>
                         </goals>
