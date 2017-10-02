@@ -47,6 +47,7 @@
                 <props>
                     <prop key="hibernate.dialect">com.nwnx.persistence.hibernate.MyMySQL57Dialect</prop>
                     <prop key="hibernate.dialect.storage_engine">innodb</prop>
+                    <!--<prop key="javax.persistence.validation.mode">none</prop>-->
                 </props>
             </property>
         </bean>
@@ -83,6 +84,7 @@
                     <prop key="hibernate.dialect.storage_engine">innodb</prop>
                     <prop key="hibernate.show_sql">true</prop>
                     <prop key="hibernate.format_sql">true</prop>
+                    <!--<prop key="javax.persistence.validation.mode">none</prop>-->
                     <!--<prop key="hibernate.hbm2ddl.auto">create</prop>-->
                 </props>
             </property>

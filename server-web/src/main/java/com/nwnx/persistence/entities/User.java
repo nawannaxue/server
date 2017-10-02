@@ -19,7 +19,7 @@ public class User {
     private int version;
 
     @CreationTimestamp
-    @Column(name = "created_on", nullable = false, updatable = false)
+    @Column(name = "created_on", nullable = false, updatable=false)
     private ZonedDateTime createdOn;
 
     @UpdateTimestamp

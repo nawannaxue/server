@@ -1,6 +1,3 @@
-"C:\Program Files\Git\bin\sh.exe" -login -i
+# "C:\Program Files\Git\bin\sh.exe" -login -i
 
-org.jboss.resteasy.annotations.providers.jackson.Formatted
-
-@Formatted
-
+## kill specific process by port number : netstat -a -o -n | find "port" then taskkill /F /PID prcoessId
