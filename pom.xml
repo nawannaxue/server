@@ -206,13 +206,6 @@
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate.validator.version}</version>
             </dependency>
-            <!--<dependency>-->
-                <!--<groupId>org.apache.tomcat</groupId>-->
-                <!--<artifactId>tomcat-jasper-el</artifactId>-->
-                <!--<version>${tomcat.version}</version>-->
-                <!--<scope>provided</scope>-->
-            <!--</dependency>-->
-
             <!-- Jackson -->
             <dependency>
                 <groupId>com.fasterxml.jackson.jaxrs</groupId>
@@ -324,28 +317,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <!--<profiles>-->
-        <!--<profile>-->
-            <!--<id>integration</id>-->
-            <!--<build>-->
-                <!--<plugins>-->
-                    <!--<plugin>-->
-                        <!--<groupId>org.codehaus.cargo</groupId>-->
-                        <!--<artifactId>cargo-maven2-plugin</artifactId>-->
-                        <!--<version>1.6.4</version>-->
-                        <!--<configuration>-->
-                            <!--<container>-->
-                                <!--<containerId>tomcat8x</containerId>-->
-                            <!--</container>-->
-                            <!--<configuration>-->
-                                <!--<type>existing</type>-->
-                                <!--<home>/usr/local/apache-tomcat-6.0.18</home>-->
-                            <!--</configuration>-->
-                        <!--</configuration>-->
-                    <!--</plugin>-->
-                <!--</plugins>-->
-            <!--</build>-->
-        <!--</profile>-->
-    <!--</profiles>-->
 </project>

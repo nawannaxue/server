@@ -17,59 +17,63 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.codehaus.cargo</groupId>
-                <artifactId>cargo-maven2-plugin</artifactId>
-                <version>1.6.4</version>
-                <configuration>
-                    <container>
-                        <containerId>tomcat8x</containerId>
-                        <systemProperties>
-                            <file.encoding>UTF-8</file.encoding>
-                            <spring.profiles.active>development</spring.profiles.active>
-                        </systemProperties>
-                        <zipUrlInstaller>
-                            <url>
-                                https://repo1.maven.org/maven2/org/apache/tomcat/tomcat/8.5.9/tomcat-8.5.9.zip
-                            </url>
-                        </zipUrlInstaller>
-                    </container>
-                    <configuration>
-                        <home>${project.build.directory}/catalina-base</home>
-                        <type>standalone</type>
-                        <properties>
-                            <cargo.servlet.port>8080</cargo.servlet.port>
-                        </properties>
-                    </configuration>
-                    <deployables>
-                        <deployable>
-                            <groupId>com.nwnx</groupId>
-                            <artifactId>server-web</artifactId>
-                            <type>war</type>
-                        </deployable>
-                    </deployables>
-                    <packager>
-                        <outputLocation>${project.build.directory}/tomcat-packaged
-                        </outputLocation>
-                    </packager>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>start</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>start</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>stop</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.cargo</groupId>-->
+                <!--<artifactId>cargo-maven2-plugin</artifactId>-->
+                <!--<version>1.6.4</version>-->
+                <!--<configuration>-->
+                    <!--<container>-->
+                        <!--<containerId>tomcat8x</containerId>-->
+                        <!--<systemProperties>-->
+                            <!--<file.encoding>UTF-8</file.encoding>-->
+                            <!--<spring.profiles.active>development</spring.profiles.active>-->
+                        <!--</systemProperties>-->
+                        <!--<zipUrlInstaller>-->
+                            <!--<url>-->
+                                <!--https://repo1.maven.org/maven2/org/apache/tomcat/tomcat/8.5.9/tomcat-8.5.9.zip-->
+                            <!--</url>-->
+                        <!--</zipUrlInstaller>-->
+                    <!--</container>-->
+                    <!--<configuration>-->
+                        <!--<home>${project.build.directory}/catalina-base</home>-->
+                        <!--<type>standalone</type>-->
+                        <!--<properties>-->
+                            <!--<cargo.servlet.port>8080</cargo.servlet.port>-->
+                        <!--</properties>-->
+                    <!--</configuration>-->
+                    <!--<deployables>-->
+                        <!--<deployable>-->
+                            <!--<groupId>com.nwnx</groupId>-->
+                            <!--<artifactId>server-web</artifactId>-->
+                            <!--<type>war</type>-->
+                            <!--<properties>-->
+                                <!--&lt;!&ndash; The WAR file has its context set to / and will therefore be deployed as ROOT.war &ndash;&gt;-->
+                                <!--<context>/</context>-->
+                            <!--</properties>-->
+                        <!--</deployable>-->
+                    <!--</deployables>-->
+                    <!--<packager>-->
+                        <!--<outputLocation>${project.build.directory}/tomcat-packaged-->
+                        <!--</outputLocation>-->
+                    <!--</packager>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>start</id>-->
+                        <!--<phase>pre-integration-test</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>start</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                    <!--<execution>-->
+                        <!--<id>stop</id>-->
+                        <!--<phase>post-integration-test</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>stop</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
@@ -101,7 +105,6 @@
             <version>${project.version}</version>
             <type>war</type>
         </dependency>
-
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
@@ -189,4 +192,72 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>integration-test</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.cargo</groupId>
+                        <artifactId>cargo-maven2-plugin</artifactId>
+                        <version>1.6.4</version>
+                        <configuration>
+                            <container>
+                                <containerId>tomcat8x</containerId>
+                                <systemProperties>
+                                    <file.encoding>UTF-8</file.encoding>
+                                    <spring.profiles.active>development</spring.profiles.active>
+                                </systemProperties>
+                                <zipUrlInstaller>
+                                    <url>
+                                        https://repo1.maven.org/maven2/org/apache/tomcat/tomcat/8.5.9/tomcat-8.5.9.zip
+                                    </url>
+                                </zipUrlInstaller>
+                            </container>
+                            <configuration>
+                                <home>${project.build.directory}/catalina-base</home>
+                                <type>standalone</type>
+                                <properties>
+                                    <cargo.servlet.port>8080</cargo.servlet.port>
+                                    <cargo.start.jvmargs>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</cargo.start.jvmargs>
+                                </properties>
+                            </configuration>
+                            <deployables>
+                                <deployable>
+                                    <groupId>com.nwnx</groupId>
+                                    <artifactId>server-web</artifactId>
+                                    <type>war</type>
+                                    <properties>
+                                        <!-- The WAR file has its context set to / and will therefore be deployed as ROOT.war -->
+                                        <context>/</context>
+                                    </properties>
+                                </deployable>
+                            </deployables>
+                            <packager>
+                                <outputLocation>${project.build.directory}/tomcat-packaged
+                                </outputLocation>
+                            </packager>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>start</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>start</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>stop</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>stop</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

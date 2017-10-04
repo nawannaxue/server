@@ -23,7 +23,7 @@ public class BaseIT {
         logger.info("beforeALL(): called");
 
         client = ClientCreator.create();
-        usersTarget = client.target("http://localhost:8080/server-web/api/users");
+        usersTarget = client.target("http://localhost:8080/api/users");
     }
 
     @AfterAll
